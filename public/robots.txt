@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mi897.github.io/sitemap-index.xml
