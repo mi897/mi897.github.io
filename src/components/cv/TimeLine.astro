@@ -1,5 +1,5 @@
 ---
-const { title, subtitle } = Astro.props;
+const { title, timeframe, subtitle } = Astro.props;
 ---
 
 <div class="flex">
@@ -8,10 +8,12 @@ const { title, subtitle } = Astro.props;
     <span class="education__line bg-primary block h-full w-[2px] translate-x-[7px]"></span>
   </div>
   <div class="experience__data bd-grid px-5">
-    <h3 class="font-semibold mb-1">{title}</h3>
-    <span class="font-light text-sm">{subtitle}</span>
-    <p class="my-2 text-justify">
+    <h3 class="font-bold text-xl">{title}</h2>
+    <p class="font-normal text-la mb-1">{subtitle}</p>
+    <p class="font-semibold text-sm mb-1">{timeframe}</p>
+    <div class="my-2 text-justify">
       <slot />
-    </p>
+      <br>
+    </div>
   </div>
 </div>
