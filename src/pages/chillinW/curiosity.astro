@@ -31,17 +31,10 @@ const {
     {TRANSITION_API && <ViewTransitions />}
   </head>
   <body>
-    <div class="bg-base-100 drawer lg:drawer-open">
-      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content bg-base-100">
-        <Header title={SITE_TITLE} />
-        <FullScreenImageAndText
-          imageUrl="https://example.com/path-to-your-image.jpg"
-          text="Your Dynamic Text"
-        />
-        <Footer />
-      </div>
-      <!-- {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />} -->
+    <Header />
+    <div class="bg-base-100" style="min-height: 90vh">
+      <FullScreenImageAndText />
     </div>
+    <Footer />
   </body>
 </html>
