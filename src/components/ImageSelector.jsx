@@ -22,7 +22,7 @@ import React, { useState, useEffect } from "react";
  */
 const ImageSelector = ({ items }) => {
   const [currentItem, setCurrentItem] = useState(items[1]);
-  const [currentText, setCurrentText] = useState(items[1].image_caption);
+  const [currentText, setCurrentText] = useState(`${items[1].image_caption}...`);
   const [textColor, setTextColor] = useState('black'); // Default text color
 
   // Function to randomly select an item
@@ -64,7 +64,7 @@ const ImageSelector = ({ items }) => {
               onLoad={() => {
                 const img = document.querySelector("img");
                 if (img) {
-                  setCurrentText(img.alt);
+                  setCurrentText(img.alt.trimEnd().endsWith(".") ? `${img.alt.trimEnd()}` : `${img.alt.trimEnd()}...`);
                 }
               }}
             />
