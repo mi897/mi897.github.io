@@ -1,0 +1,13 @@
+---
+import ImageSelector from './ImageSelector.jsx';
+
+// Load the JSON from the public folder
+// const response = await fetch('/curiosity-articles.json'); // Adjust the path to your JSON file in the `public` folder
+// const items = await response.json();
+
+import items from '../../public/curiosity-articles.json';
+---
+
+<div>
+  <ImageSelector items={items} client:load />
+</div>
