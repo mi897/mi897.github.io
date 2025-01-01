@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
+import { EMAIL, LINKEDIN_PROFILE } from "src/config";
 ---
 
 <BaseLayout title="Resume" sideBarActiveItemID="cv">
@@ -9,22 +10,30 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
   </div>
 
   <div class="mb-10 text-justify">
-    <p class='mb-5'>
-      A highly skilled and experienced software engineer with a strong focus
-      on system design and architecture. Equipped with a deep understanding of backend
-      technologies, data structures, and algorithms, I am passionate about building
-      scalable, robust, and efficient systems that power mission-critical applications.
-      With a proven track record of designing and implementing complex solutions,
-      I excel in analyzing requirements, architecting solutions, and optimizing
-      performance to meet the demands of modern software development.
+    <p class="mb-5">
+      A highly skilled and experienced software engineer with a strong focus on
+      system design and architecture. Equipped with a deep understanding of
+      backend technologies, data structures, and algorithms, I am passionate
+      about building scalable, robust, and efficient systems that power
+      mission-critical applications. With a proven track record of designing and
+      implementing complex solutions, I excel in analyzing requirements,
+      architecting solutions, and optimizing performance to meet the demands of
+      modern software development.
     </p>
 
     <p>
-      Outside of professional software development, I'm currently researching legged
-      locomotion using model-free reinforcement learning.
+      Outside of professional software development, I'm currently researching
+      legged locomotion using model-free reinforcement learning.
     </p>
-    
   </div>
+
+  <div class="mt-8">
+    <a class="btn btn-outline" href=`mailto:${EMAIL}` target="_blank">
+      Reach out @ {EMAIL}
+    </a>
+  </div>
+
+  <br />
 
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Education</div>
@@ -36,7 +45,6 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
       subtitle="North South University, Dhaka, Bangladesh"
       timeframe="Jan 2017 - Dec 2021"
     />
-
   </div>
 
   <div class="mb-5">
@@ -44,66 +52,94 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
   </div>
 
   <div class="time-line-container mb-5">
+    <TimeLineElement
+      title="Backend Developer"
+      subtitle="LYXA SAL, Dhaka, Bangladesh"
+      timeframe="Jul 2024 - Current"
+    >
+      <ul class="list-disc">
+        <li>
+          Developed and maintained backend systems for web and mobile
+          applications
+        </li>
+        <li>
+          Designed and optimized CI/CD pipelines for frontend and backend using
+          GitHub Actions and Cloud Build, deploying applications to Google Cloud
+          Platform
+        </li>
+        <li>
+          Improved API performance by reducing response size and load times by
+          up to 8x
+        </li>
+        <li>
+          Debugged and resolved critical issues, including financial calculation
+          errors, ensuring reliable and accurate system functionality
+        </li>
+        <li>
+          Contributed to database schema design and collaborated on a
+          TypeScript-based project using tRPC for enhanced efficiency and
+          scalability
+        </li>
+      </ul>
+    </TimeLineElement>
 
     <TimeLineElement
-    title="Backend Developer"
-    subtitle="LYXA SAL, Dhaka, Bangladesh"
-    timeframe="Jul 2024 - Current"
-  >
+      title="Software Engineer"
+      subtitle="Stellar Stories & Co, Remote (Contractual)"
+      timeframe="Jan 2024 - Current"
+    >
+      <p class="mb-2">
+        Primarily focussed on back-end development specializing in system
+        architecture design and DevOps.
+      </p>
 
-  <ul class="list-disc">
-    <li>Developed and maintained backend systems for web and mobile applications</li>
-    <li>Designed and optimized CI/CD pipelines for frontend and backend using GitHub Actions and Cloud Build, deploying applications to Google Cloud Platform</li>
-    <li>Improved API performance by reducing response size and load times by up to 8x</li>
-    <li>Debugged and resolved critical issues, including financial calculation errors, ensuring reliable and accurate system functionality</li>
-    <li>Contributed to database schema design and collaborated on a TypeScript-based project using tRPC for enhanced efficiency and scalability</li>
-  </ul>
-  </TimeLineElement>
+      <p class="mb-2">Development Stack:</p>
+      <ul class="list-disc">
+        <li>MongoDB</li>
+        <li>Express</li>
+        <li>NodeJS</li>
+        <li>Typescript</li>
+        <li>SocketIO</li>
+        <li>Redis</li>
+      </ul>
 
-    <TimeLineElement
-    title="Software Engineer"
-    subtitle="Stellar Stories & Co, Remote (Contractual)"
-    timeframe="Jan 2024 - Current"
-  >
+      <br />
 
-  <p class="mb-2">Primarily focussed on back-end development specializing in system architecture design and DevOps.</p>
-
-  <p class="mb-2">Development Stack:</p>
-  <ul class="list-disc">
-    <li>MongoDB</li>
-    <li>Express</li>
-    <li>NodeJS</li>
-    <li>Typescript</li>
-    <li>SocketIO</li>
-    <li>Redis</li>
-  </ul>
-
-  <br/>
-
-  <p class="mb-2">DevOps Stack:</p>
-  <ul class="list-disc">
-    <li>AWS</li>
-    <li>GCP</li>
-    <li>Back4App</li>
-    <li>Docker</li>
-    <li>Github Actions</li>
-  </ul>
-  </TimeLineElement>
+      <p class="mb-2">DevOps Stack:</p>
+      <ul class="list-disc">
+        <li>AWS</li>
+        <li>GCP</li>
+        <li>Back4App</li>
+        <li>Docker</li>
+        <li>Github Actions</li>
+      </ul>
+    </TimeLineElement>
 
     <TimeLineElement
       title="Systems Engineer | Backend Developer"
       subtitle="mi8 Studio, Dhaka, Bangladesh"
       timeframe="Apr 2023 - Current"
     >
+      <p class="mb-2">
+        Primarily in charge of leading the software development team and
+        designing customized solutions. This includes:
+      </p>
 
-    <p class="mb-2">Primarily in charge of leading the software development team and designing customized solutions. This includes: </p>
-
-    <ul class="list-disc">
-      <li>Conducting software requirement meetings with clients in order to define actionable project specifications</li>
-      <li>Crafting robust system architectures by conducting thorough analysis of client needs, industry standards, and scalability requirements</li>
-      <li>Overseeing the development process to ensure adherence to timelines and quality standards</li>
-      <li>Providing technical guidance and mentoring to team members</li>
-    </ul>
+      <ul class="list-disc">
+        <li>
+          Conducting software requirement meetings with clients in order to
+          define actionable project specifications
+        </li>
+        <li>
+          Crafting robust system architectures by conducting thorough analysis
+          of client needs, industry standards, and scalability requirements
+        </li>
+        <li>
+          Overseeing the development process to ensure adherence to timelines
+          and quality standards
+        </li>
+        <li>Providing technical guidance and mentoring to team members</li>
+      </ul>
     </TimeLineElement>
 
     <TimeLineElement
@@ -111,15 +147,23 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
       subtitle="Qavlo, Dhaka, Bangladesh"
       timeframe="Nov 2021 - Apr 2023"
     >
+      <p class="mb-2">
+        Lead developer responsible for creating custom automation tools,
+        evolving into a comprehensive development framework, and integrating
+        DevOps practices for seamless deployment pipelines.
+      </p>
 
-    <p class="mb-2">Lead developer responsible for creating custom automation tools, evolving into a
-      comprehensive development framework, and integrating DevOps practices for
-      seamless deployment pipelines. </p>
-    
-    <ul class="list-disc">
-      <li>Designed and implemented custom automation tools to streamline development workflows, encompassing frontend, backend, and design processes </li>
-      <li>Integrated DevOps practices to enable seamless deployment pipelines from development to production</li>
-    </ul>
+      <ul class="list-disc">
+        <li>
+          Designed and implemented custom automation tools to streamline
+          development workflows, encompassing frontend, backend, and design
+          processes
+        </li>
+        <li>
+          Integrated DevOps practices to enable seamless deployment pipelines
+          from development to production
+        </li>
+      </ul>
     </TimeLineElement>
 
     <TimeLineElement
@@ -127,15 +171,30 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
       subtitle="Inkam, Dhaka, Bangladesh"
       timeframe="Jan 2022 - Oct 2022"
     >
-    <p class="mb-2">Drove workflow enhancements within the company by automating repetitive tasks, reducing time and effort expended on routine operations. </p>
+      <p class="mb-2">
+        Drove workflow enhancements within the company by automating repetitive
+        tasks, reducing time and effort expended on routine operations.
+      </p>
 
-    <ul class="list-disc">
-      <li>Created custom tools tailored to the specific needs of the operations team, streamlining their workflows and enhancing productivity </li>
-      <li>Introduced DevOps practices and methodologies to improve the software development workflow, fostering a culture of collaboration, automation, and continuous improvement </li>
-      <li>Implemented advanced version control, automated testing, and deployment pipelines to accelerate the delivery of software releases </li>
-      <li>Provided assistance and support to the backend development team to ensure the scalability and reliability of the system </li>
-    </ul>
-
+      <ul class="list-disc">
+        <li>
+          Created custom tools tailored to the specific needs of the operations
+          team, streamlining their workflows and enhancing productivity
+        </li>
+        <li>
+          Introduced DevOps practices and methodologies to improve the software
+          development workflow, fostering a culture of collaboration,
+          automation, and continuous improvement
+        </li>
+        <li>
+          Implemented advanced version control, automated testing, and
+          deployment pipelines to accelerate the delivery of software releases
+        </li>
+        <li>
+          Provided assistance and support to the backend development team to
+          ensure the scalability and reliability of the system
+        </li>
+      </ul>
     </TimeLineElement>
 
     <TimeLineElement
@@ -143,8 +202,10 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
       subtitle="e-Yantra - IIT Bombay, Mumbai, India"
       timeframe="May 2021 - Jul 2021"
     >
-    <p class="mb-2">Worked on "Simulation of a Quadruped in ROS Gazebo" as part of e-YSIP-2021. </p>
-
+      <p class="mb-2">
+        Worked on "Simulation of a Quadruped in ROS Gazebo" as part of
+        e-YSIP-2021.
+      </p>
     </TimeLineElement>
 
     <TimeLineElement
@@ -152,14 +213,15 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
       subtitle="The Tech Academy, Mumbai, India"
       timeframe="Jul 2018 - May 2019"
     >
-
-    <p class="mb-2">Helped develop robotics projects to teach basic electronics and hardware programming.
-      Also created a handful of games (using the Godot game engine) that focus on specific game mechanics, to teach programming and game development to high schoolers.
-      Apart from making the projects, worked on developing a curriculum for the students to gain a deep understanding of how they work.
-    </p>
-
+      <p class="mb-2">
+        Helped develop robotics projects to teach basic electronics and hardware
+        programming. Also created a handful of games (using the Godot game
+        engine) that focus on specific game mechanics, to teach programming and
+        game development to high schoolers. Apart from making the projects,
+        worked on developing a curriculum for the students to gain a deep
+        understanding of how they work.
+      </p>
     </TimeLineElement>
-
   </div>
 
   <div class="mb-5">
@@ -168,10 +230,20 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
 
   <ul class="list-disc mx-6 mb-10 grid gap-2">
     <li>
-      <a href="https://coursera.org/share/4f2182e71dc0a43dc7d5b90d50db4427" target="_blank"> Fundamentals of Reinforcement Learning </a>
+      <a
+        href="https://coursera.org/share/4f2182e71dc0a43dc7d5b90d50db4427"
+        target="_blank"
+      >
+        Fundamentals of Reinforcement Learning
+      </a>
     </li>
     <li>
-      <a href="https://coursera.org/share/287750c8cb5462a02f263899cf5d7210" target="_blank"> Sample-based Learning Methods </a>
+      <a
+        href="https://coursera.org/share/287750c8cb5462a02f263899cf5d7210"
+        target="_blank"
+      >
+        Sample-based Learning Methods
+      </a>
     </li>
   </ul>
 
@@ -195,6 +267,5 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
     <li>Git</li>
     <li>Electronics</li>
     <li>Simulation</li>
-    
   </ul>
 </BaseLayout>
