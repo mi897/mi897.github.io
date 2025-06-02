@@ -1,6 +1,6 @@
 ---
 title: "Love"
-description: "The first"
+description: "the first"
 pubDate: "Jun 2 2025"
 heroImage: "/post_img.webp"
 tags: ["Love"]
