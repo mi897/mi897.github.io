@@ -2,7 +2,7 @@
 title: "Hello You"
 description: "a beginning"
 pubDate: "Apr 24 2023"
-heroImage: "/post_img.webp"
+heroImage: "/post_img.png"
 tags: ["Poetry"]
 ---
 

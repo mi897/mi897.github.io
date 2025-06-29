@@ -2,7 +2,7 @@
 title: "Multi Agent Systems"
 description: "of flocks, schools, and boids"
 pubDate: "Jan 11 2024"
-heroImage: "/post_img.webp"
+heroImage: "/post_img.png"
 tags: ["Poetry"]
 ---
 

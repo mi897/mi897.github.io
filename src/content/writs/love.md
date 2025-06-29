@@ -2,7 +2,7 @@
 title: "Love"
 description: "the first"
 pubDate: "Jun 2 2025"
-heroImage: "/post_img.webp"
+heroImage: "/post_img.png"
 tags: ["Love"]
 ---
 
