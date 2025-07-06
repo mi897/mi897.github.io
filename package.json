@@ -1,13 +1,13 @@
 {
-  "name": "astrofy",
-  "description": "Astrofy is a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS. Create in minutes a website with Blog, CV, Project Section, Store and RSS Feed.",
+  "name": "mi8-studio-website",
+  "description": "mi8 studio website",
   "type": "module",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@9.4.0",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
+    "start": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
