@@ -1,8 +1,8 @@
 # === Stage 1: Build the Astro site ===
 FROM node:20-alpine AS builder
 
-# Install pnpm globally
-RUN npm install -g pnpm
+# Install pnpm and a static file server globally
+RUN npm install -g pnpm http-server
 
 # Set working directory
 WORKDIR /app
@@ -17,23 +17,10 @@ RUN pnpm install
 COPY . .
 
 # Build the site
-RUN pnpm build
-
-
-# === Stage 2: Serve the static site ===
-FROM node:20-alpine
-
-# Install a static file server
-RUN npm install -g http-server
-
-# Copy the built site from the builder
-COPY --from=builder /app/dist /app/dist
-
-# Set working directory
-WORKDIR /app/dist
+RUN npm run build
 
 # Expose port
 EXPOSE 8080
 
 # Serve the site
-CMD ["http-server", "."]
+CMD ["http-server", "dist/"]
