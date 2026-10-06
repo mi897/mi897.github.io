@@ -1,5 +1,5 @@
 # === Stage 1: Build the Astro site ===
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 # Install pnpm and a static file server globally
 RUN npm install -g pnpm http-server
@@ -11,13 +11,13 @@ WORKDIR /app
 COPY pnpm-lock.yaml package.json ./
 
 # Install dependencies
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Copy the rest of your project files
 COPY . .
 
 # Build the site
-RUN npm run build
+RUN pnpm build
 
 # Expose port
 EXPOSE 8080

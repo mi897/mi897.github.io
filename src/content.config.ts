@@ -1,4 +1,6 @@
-import { z, defineCollection } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 const writsSchema = z.object({
     title: z.string(),
     description: z.string(),
@@ -27,8 +29,14 @@ const storeSchema = z.object({
 export type WritsSchema = z.infer<typeof writsSchema>;
 export type StoreSchema = z.infer<typeof storeSchema>;
 
-const writsCollection = defineCollection({ schema: writsSchema });
-const storeCollection = defineCollection({ schema: storeSchema });
+const writsCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/writs" }),
+    schema: writsSchema,
+});
+const storeCollection = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/store" }),
+    schema: storeSchema,
+});
 
 export const collections = {
     'writs': writsCollection,
