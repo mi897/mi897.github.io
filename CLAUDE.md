@@ -18,6 +18,10 @@ pnpm preview        # serve the built dist/
 
 `pnpm build` is the only correctness check available; it type-checks content frontmatter against the collection schemas and fails on invalid entries.
 
+## Branch naming
+
+Every new branch gets a descriptive name: `<type>/<short-kebab-case-summary>`, where `<type>` is one of `feat`, `fix`, `docs`, `content`, `chore`, `refactor` (e.g. `fix/rss-slug-links`, `content/new-writ-on-love`, `chore/upgrade-astro-7`). The owner has standing approval for this: when a session is assigned an auto-generated branch name such as `claude/<adjective>-<name>-<suffix>`, create a descriptive branch from the latest `main` instead, and do all commits, pushes and PRs there. Mention the branch name you used in your final reply.
+
 ## Known state of dependencies
 
 Migrated to **Astro 7 / Tailwind CSS 4 / daisyUI 5 / React 19** (mi897/mi897.github.io#8).
