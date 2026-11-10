@@ -100,7 +100,7 @@
   {
     "arxiv_id": "2509.17350",
     "url": "https://arxiv.org/abs/2509.17350",
-    "title": "DyDexHandover: Human-like Dynamic Dexterous Bimanual Handover using RGB-only Perception",
+    "title": "DyDexHandover: Human-like Bimanual Dynamic Dexterous Handover using RGB-only Perception",
     "authors": "Zhou, You, Wang",
     "date": "Sept 2025",
     "topic": "Cooperative manipulation",
@@ -114,7 +114,7 @@
   {
     "arxiv_id": "2603.08111",
     "url": "https://arxiv.org/abs/2603.08111",
-    "title": "DeReCo: Decoupling Representation and Coordination Learning for Object-Adaptive Decentralized Multi-Robot Cooperative Transport",
+    "title": "DeReCo: Decoupling Representation and Coordination Learning for Object-Adaptive Decentralized Multi-Robot Cooperative Grasping and Lifting",
     "authors": "Shibata, Sota, Bosch, Kadokawa, Tsurumine, Matsubara",
     "date": "Mar 2026",
     "topic": "Cooperative manipulation",
@@ -170,7 +170,7 @@
   {
     "arxiv_id": "2505.13729",
     "url": "https://arxiv.org/abs/2505.13729",
-    "title": "SayCoNav: LLMs for Adaptive Collaboration in Decentralized Multi-Robot Navigation",
+    "title": "SayCoNav: Utilizing Large Language Models for Adaptive Collaboration in Decentralized Multi-Robot Navigation",
     "authors": "Rajvanshi, Sahu, Shan, Chiu, Sikka",
     "date": "May 2025",
     "topic": "LLM-based robot teams",
@@ -268,7 +268,7 @@
   {
     "arxiv_id": "2505.06513",
     "url": "https://arxiv.org/abs/2505.06513",
-    "title": "LLM-Flock: Decentralized Multi-Robot Flocking via Large Language Models and Influence-Based Consensus",
+    "title": "LLM-Flock: LLM-Driven Decentralized Multi-Robot Flocking via Influence-Based Consensus with Collision Avoidance",
     "authors": "Li, Zhou",
     "date": "May 2025",
     "topic": "Formation control",
