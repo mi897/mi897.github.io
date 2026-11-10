@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Progress from "../../../components/research/Progress.astro";
+import topics from "../../../data/research/topics.json";
+import papers from "../../../data/research/decentralized-robot-collaboration/papers.json";
+import log from "../../../data/research/decentralized-robot-collaboration/log.json";
+import { formatDate, type Paper, type LogEntry } from "../../../lib/research";
+
+const topic = topics.find((t) => t.slug === "decentralized-robot-collaboration")!;
+const latest = ([...log] as LogEntry[]).sort((a, b) => b.date.localeCompare(a.date))[0];
+---
+
+<BaseLayout title={`${topic.title} · Research`} description={topic.summary} noindex wide>
+  <nav class="text-sm breadcrumbs mb-2"><ul><li><a href="/research/">Research</a></li><li>{topic.title}</li></ul></nav>
+  <h1 class="text-3xl font-bold mb-3">{topic.title}</h1>
+  <p class="leading-relaxed mb-2">{topic.summary}</p>
+  <p class="text-sm opacity-60 mb-6">Started {formatDate(topic.started)} · {topic.scope}</p>
+
+  <div class="grid gap-4 sm:grid-cols-2 mb-10">
+    <a href="reading-list/" class="card bg-base-200 hover:bg-base-300 transition-colors"><div class="card-body p-5"><h2 class="card-title">Reading list</h2><p class="text-sm">{papers.length} papers grouped by topic, with abstract and conclusion summaries.</p></div></a>
+    <a href="log/" class="card bg-base-200 hover:bg-base-300 transition-colors"><div class="card-body p-5"><h2 class="card-title">Research log</h2><p class="text-sm">{log.length} {log.length === 1 ? "entry" : "entries"}, newest first. Latest: {formatDate(latest.date)}.</p></div></a>
+  </div>
+
+  <h2 class="text-xl font-bold mb-3">Progress</h2>
+  <div class="mb-10"><Progress papers={papers as Paper[]} /></div>
+
+  <h2 class="text-xl font-bold mb-3">Latest findings <span class="text-sm font-normal opacity-60">· {formatDate(latest.date)}</span></h2>
+  <ul class="list-disc pl-5 space-y-2 leading-relaxed">{latest.found.map((f) => <li>{f}</li>)}</ul>
+  <p class="mt-4"><a class="link link-primary" href="log/">Full log →</a></p>
+</BaseLayout>

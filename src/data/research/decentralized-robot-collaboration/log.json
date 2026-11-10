@@ -1,0 +1,29 @@
+[
+  {
+    "date": "2026-11-10",
+    "title": "First literature search",
+    "did": [
+      "Ran five web searches aimed at arXiv: decentralized task allocation with emergent roles; decentralized cooperative manipulation with dual-arm multi-agent RL; decentralized LLM multi-robot collaboration; decentralized formation control with consensus or learning.",
+      "Ran follow-ups on RoCo, emergent role specialization, task allocation surveys, emergent communication, and cooperative transport with GNN policies.",
+      "Collected 22 papers into five topic groups. Summaries are model-written paraphrases and have not been verified line by line. This was not an exhaustive survey."
+    ],
+    "found": [
+      "Formation control is the most mature area: proofs, large swarms, real drones. Open items the papers name: obstacles, communication delay, role switching.",
+      "Role negotiation combined with contact-rich manipulation looks thin. LLM-dialog papers settle roles in language but plan motion centrally (RoCo) or work on navigation and exploration. Manipulation papers (LatentToM 2505.09144, DynaMAC 2607.22119, CLAS 2211.15824) coordinate implicitly through learned policies rather than explicit role negotiation. This could be a gap, but it comes from a five-query search and is not confirmed.",
+      "Most results are simulation only. Several papers list sim-to-real as future work."
+    ],
+    "papers_added": ["2109.14755", "2405.13941", "2309.08896", "2501.08726", "2505.09144", "2607.22119", "2211.15824", "2509.17350", "2603.08111", "2205.06196", "2307.04738", "2409.16030", "2505.13729", "2603.04762", "2410.11387", "2410.23581", "2312.07523", "2602.00980", "2606.04248", "2505.06513", "2307.12287", "2508.02912"],
+    "open_questions": [
+      "Is the gap between explicit role negotiation and contact-rich manipulation real, or just an artifact of a five-query search?",
+      "Do any of the manipulation papers handle sim-to-real for decentralized coordination?",
+      "2307.12287 has no conclusion summary yet (only the abstract was retrieved)."
+    ],
+    "next_steps": [
+      "Read first: 2607.22119 (very recent, decentralized bimanual with no fixed leader) and 2505.09144. 2109.14755 is the closest on decentralized role assignment.",
+      "Search \"emergent role specialization\" and \"asymmetric roles\" in multi-agent RL for manipulation.",
+      "Search bimanual MARL with asymmetric roles; handover and tool-use cooperation.",
+      "Search swarm robotics papers on role differentiation.",
+      "Citation-chase from 2607.22119, 2505.09144 and 2109.14755."
+    ]
+  }
+]
