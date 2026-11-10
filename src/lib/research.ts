@@ -7,8 +7,8 @@ export interface Paper {
   authors: string;
   date: string;
   topic: string;
-  abstract_summary: string;
-  conclusion_summary: string | null;
+  abstract: string;
+  conclusion: string | null;
   note: string | null;
   status: Status;
   added: string; // YYYY-MM-DD

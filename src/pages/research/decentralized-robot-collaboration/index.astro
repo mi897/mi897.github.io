@@ -17,7 +17,7 @@ const latest = ([...log] as LogEntry[]).sort((a, b) => b.date.localeCompare(a.da
   <p class="text-sm opacity-60 mb-6">Started {formatDate(topic.started)} · {topic.scope}</p>
 
   <div class="grid gap-4 sm:grid-cols-2 mb-10">
-    <a href="reading-list/" class="card bg-base-200 hover:bg-base-300 transition-colors"><div class="card-body p-5"><h2 class="card-title">Reading list</h2><p class="text-sm">{papers.length} papers grouped by topic, with abstract and conclusion summaries.</p></div></a>
+    <a href="reading-list/" class="card bg-base-200 hover:bg-base-300 transition-colors"><div class="card-body p-5"><h2 class="card-title">Reading list</h2><p class="text-sm">{papers.length} papers grouped by topic, with each paper's abstract and conclusion.</p></div></a>
     <a href="log/" class="card bg-base-200 hover:bg-base-300 transition-colors"><div class="card-body p-5"><h2 class="card-title">Research log</h2><p class="text-sm">{log.length} {log.length === 1 ? "entry" : "entries"}, newest first. Latest: {formatDate(latest.date)}.</p></div></a>
   </div>
 

@@ -2,7 +2,7 @@
 import { statusBadge, type Paper } from "../../lib/research";
 interface Props { paper: Paper; }
 const { paper } = Astro.props;
-const search = [paper.title, paper.authors, paper.arxiv_id, paper.abstract_summary, paper.conclusion_summary ?? "", paper.note ?? ""].join(" ").toLowerCase();
+const search = [paper.title, paper.authors, paper.arxiv_id, paper.abstract, paper.conclusion ?? "", paper.note ?? ""].join(" ").toLowerCase();
 ---
 
 <article class="paper-card card bg-base-200 shadow-sm" data-search={search} id={`p-${paper.arxiv_id}`}>
@@ -18,14 +18,14 @@ const search = [paper.title, paper.authors, paper.arxiv_id, paper.abstract_summa
     {paper.note && <p class="text-sm italic opacity-80">{paper.note}</p>}
     <div class="grid gap-4 md:grid-cols-2">
       <section>
-        <h4 class="text-xs font-semibold uppercase tracking-wide opacity-60 mb-1">Abstract (summary)</h4>
-        <p class="text-sm leading-relaxed">{paper.abstract_summary}</p>
+        <h4 class="text-xs font-semibold uppercase tracking-wide opacity-60 mb-1">Abstract</h4>
+        <p class="text-sm leading-relaxed">{paper.abstract}</p>
       </section>
       <section>
-        <h4 class="text-xs font-semibold uppercase tracking-wide opacity-60 mb-1">Conclusion (summary)</h4>
-        {paper.conclusion_summary
-          ? <p class="text-sm leading-relaxed">{paper.conclusion_summary}</p>
-          : <p class="text-sm leading-relaxed opacity-60">Not summarized yet.</p>}
+        <h4 class="text-xs font-semibold uppercase tracking-wide opacity-60 mb-1">Conclusion</h4>
+        {paper.conclusion
+          ? <div class="space-y-2">{paper.conclusion.split("\n\n").map((para) => <p class="text-sm leading-relaxed">{para}</p>)}</div>
+          : <p class="text-sm leading-relaxed opacity-60">No conclusion text yet.</p>}
       </section>
     </div>
     <section class="rounded-box bg-base-100 p-3">
