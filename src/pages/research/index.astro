@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import topics from "../../data/research/topics.json";
+import { formatDate } from "../../lib/research";
+---
+
+<BaseLayout title="Research" description="Research topics and reading lists" noindex>
+  <h1 class="text-3xl font-bold mb-2">Research</h1>
+  <p class="opacity-70 mb-8">Topics I'm studying.</p>
+  <ul class="grid gap-4">
+    {topics.map((t) => (
+      <li>
+        <a href={`/research/${t.slug}/`} class="card bg-base-200 hover:bg-base-300 transition-colors shadow-sm">
+          <div class="card-body p-5">
+            <h2 class="card-title">{t.title}</h2>
+            <p class="text-sm leading-relaxed">{t.summary}</p>
+            <p class="text-xs opacity-60">Started {formatDate(t.started)} · {t.scope}</p>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

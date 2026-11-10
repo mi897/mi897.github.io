@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Progress from "../../../components/research/Progress.astro";
+import papersData from "../../../data/research/decentralized-robot-collaboration/papers.json";
+import logData from "../../../data/research/decentralized-robot-collaboration/log.json";
+import { formatDate, type Paper, type LogEntry } from "../../../lib/research";
+
+const papers = papersData as Paper[];
+const byId = new Map(papers.map((p) => [p.arxiv_id, p]));
+const log = ([...logData] as LogEntry[]).sort((a, b) => b.date.localeCompare(a.date));
+const sections: [string, keyof LogEntry][] = [
+  ["What I did", "did"], ["What I found", "found"], ["Open questions", "open_questions"], ["Next steps", "next_steps"],
+];
+---
+
+<BaseLayout title="Research log · Decentralized robot collaboration" description="Dated research log" noindex wide>
+  <nav class="text-sm breadcrumbs mb-2"><ul><li><a href="/research/">Research</a></li><li><a href="../">Decentralized robot collaboration</a></li><li>Log</li></ul></nav>
+  <h1 class="text-3xl font-bold mb-6">Research log</h1>
+
+  <div class="mb-10"><Progress papers={papers} /></div>
+
+  <div class="space-y-10">
+    {log.map((e) => (
+      <article id={e.date} class="border-l-4 border-primary pl-5">
+        <h2 class="text-xl font-bold"><time datetime={e.date}>{formatDate(e.date)}</time>{e.title && <span class="font-normal opacity-70"> · {e.title}</span>}</h2>
+        {sections.map(([label, key]) => (e[key] as string[]).length > 0 && (
+          <section class="mt-4">
+            <h3 class="text-xs font-semibold uppercase tracking-wide opacity-60 mb-1">{label}</h3>
+            <ul class="list-disc pl-5 space-y-1.5 leading-relaxed">{(e[key] as string[]).map((t) => <li>{t}</li>)}</ul>
+          </section>
+        ))}
+        {e.papers_added.length > 0 && (
+          <section class="mt-4">
+            <h3 class="text-xs font-semibold uppercase tracking-wide opacity-60 mb-1">Papers added ({e.papers_added.length})</h3>
+            <ul class="space-y-1 text-sm">
+              {e.papers_added.map((id) => (
+                <li><a class="link link-primary" href={`../reading-list/#p-${id}`}>{id}</a>{byId.get(id) && <span class="opacity-70"> — {byId.get(id)!.title}</span>}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </article>
+    ))}
+  </div>
+</BaseLayout>

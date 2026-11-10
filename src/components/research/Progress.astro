@@ -1,0 +1,39 @@
+---
+import { progress, STATUSES, formatDate, type Paper } from "../../lib/research";
+interface Props { papers: Paper[]; }
+const { papers } = Astro.props;
+const { weeks, counts, total } = progress(papers);
+const maxWeek = Math.max(1, ...weeks.map(([, n]) => n));
+const fill: Record<string, string> = { unread: "bg-base-content/30", reading: "bg-warning", read: "bg-success" };
+---
+
+<div class="grid gap-6 md:grid-cols-2">
+  <div class="rounded-box bg-base-200 p-5">
+    <h3 class="font-semibold mb-3">Papers added per week</h3>
+    <table class="table table-sm">
+      <thead><tr><th>Week of</th><th class="w-full"></th><th class="text-right">Papers</th></tr></thead>
+      <tbody>
+        {weeks.map(([week, n]) => (
+          <tr>
+            <td class="whitespace-nowrap">{formatDate(week)}</td>
+            <td><div class="h-3 rounded bg-primary" style={`width:${(n / maxWeek) * 100}%`}></div></td>
+            <td class="text-right">{n}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <div class="rounded-box bg-base-200 p-5">
+    <h3 class="font-semibold mb-3">Read vs unread <span class="font-normal opacity-60">({total} papers)</span></h3>
+    <div class="flex h-4 w-full overflow-hidden rounded bg-base-300" role="img" aria-label={STATUSES.map((s) => `${counts[s]} ${s}`).join(", ")}>
+      {STATUSES.map((s) => counts[s] > 0 && <div class={fill[s]} style={`width:${(counts[s] / total) * 100}%`}></div>)}
+    </div>
+    <table class="table table-sm mt-3">
+      <tbody>
+        {STATUSES.map((s) => (
+          <tr><td class="flex items-center gap-2"><span class={`inline-block size-3 rounded-sm ${fill[s]}`}></span>{s}</td><td class="text-right">{counts[s]}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

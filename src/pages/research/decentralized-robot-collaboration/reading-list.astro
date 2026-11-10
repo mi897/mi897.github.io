@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PaperCard from "../../../components/research/PaperCard.astro";
+import papersData from "../../../data/research/decentralized-robot-collaboration/papers.json";
+import { slugify, topicColors, type Paper } from "../../../lib/research";
+
+const papers = papersData as Paper[];
+const colors = topicColors(papers);
+const groups = [...colors.keys()].map((topic) => ({ topic, id: slugify(topic), color: colors.get(topic)!, papers: papers.filter((p) => p.topic === topic) }));
+// Tailwind needs full class names, so list them literally.
+const chip: Record<string, string> = { primary: "badge-primary", secondary: "badge-secondary", accent: "badge-accent", info: "badge-info", success: "badge-success", warning: "badge-warning" };
+const bar: Record<string, string> = { primary: "border-primary", secondary: "border-secondary", accent: "border-accent", info: "border-info", success: "border-success", warning: "border-warning" };
+---
+
+<BaseLayout title="Reading list · Decentralized robot collaboration" description="Papers on decentralized robot collaboration" noindex wide>
+  <nav class="text-sm breadcrumbs mb-2"><ul><li><a href="/research/">Research</a></li><li><a href="../">Decentralized robot collaboration</a></li><li>Reading list</li></ul></nav>
+  <h1 class="text-3xl font-bold mb-2">Reading list</h1>
+  <p class="text-sm opacity-70 mb-5">{papers.length} arXiv papers. Abstracts are from arXiv and conclusions are each paper's own Conclusion section, quoted as published.</p>
+
+  <div class="md:sticky top-0 z-10 bg-base-100/95 backdrop-blur py-3 -mx-2 px-2 space-y-3">
+    <input id="filter" type="search" class="input input-bordered w-full" placeholder="Filter by title, author, arXiv ID, abstract or conclusion" aria-label="Filter papers" />
+    <nav class="flex flex-wrap gap-2" aria-label="Topic groups">
+      {groups.map((g) => <a href={`#${g.id}`} class={`badge badge-lg ${chip[g.color]}`}>{g.topic} <span class="opacity-70 ml-1" data-count-for={g.id}>{g.papers.length}</span></a>)}
+    </nav>
+    <p id="match-count" class="text-xs opacity-60" aria-live="polite"></p>
+  </div>
+
+  {groups.map((g) => (
+    <section class="group-section mt-10 scroll-mt-40" id={g.id}>
+      <h2 class={`text-2xl font-bold mb-4 border-l-4 pl-3 ${bar[g.color]}`}>{g.topic}</h2>
+      <div class="grid gap-4">{g.papers.map((p) => <PaperCard paper={p} />)}</div>
+    </section>
+  ))}
+  <p id="no-results" class="hidden mt-10 opacity-70">No papers match that filter.</p>
+</BaseLayout>
+
+<script>
+  const input = document.getElementById("filter") as HTMLInputElement;
+  const cards = [...document.querySelectorAll<HTMLElement>(".paper-card")];
+  const sections = [...document.querySelectorAll<HTMLElement>(".group-section")];
+  const apply = () => {
+    const q = input.value.trim().toLowerCase();
+    const terms = q.split(/\s+/).filter(Boolean);
+    let shown = 0;
+    for (const c of cards) {
+      const ok = terms.every((t) => c.dataset.search!.includes(t));
+      c.classList.toggle("hidden", !ok);
+      if (ok) shown++;
+    }
+    for (const s of sections) {
+      const n = s.querySelectorAll(".paper-card:not(.hidden)").length;
+      s.classList.toggle("hidden", n === 0);
+      const c = document.querySelector(`[data-count-for="${s.id}"]`);
+      if (c) c.textContent = String(n);
+    }
+    document.getElementById("match-count")!.textContent = q ? `${shown} of ${cards.length} papers` : "";
+    document.getElementById("no-results")!.classList.toggle("hidden", shown > 0);
+  };
+  input.addEventListener("input", apply);
+</script>

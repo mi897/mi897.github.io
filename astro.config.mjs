@@ -7,7 +7,8 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mi897.github.io',
-  integrations: [mdx(), sitemap(), react()],
+  integrations: [mdx(), // /research is unlisted: reachable by link only, so keep it out of the sitemap
+    sitemap({ filter: (page) => !new URL(page).pathname.startsWith('/research') }), react()],
   vite: {
     plugins: [tailwindcss()],
   },
