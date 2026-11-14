@@ -13,32 +13,13 @@ const writsSchema = z.object({
     }).optional(),
 });
 
-const storeSchema = z.object({
-    title: z.string(),
-    description: z.string(),
-    custom_link_label: z.string(),
-    custom_link: z.string().optional(),
-    updatedDate: z.coerce.date(),
-    pricing: z.string().optional(),
-    oldPricing: z.string().optional(),
-    badge: z.string().optional(),
-    checkoutUrl: z.string().optional(),
-    heroImage: z.string().optional(),
-});
-
 export type WritsSchema = z.infer<typeof writsSchema>;
-export type StoreSchema = z.infer<typeof storeSchema>;
 
 const writsCollection = defineCollection({
     loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/writs" }),
     schema: writsSchema,
 });
-const storeCollection = defineCollection({
-    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/store" }),
-    schema: storeSchema,
-});
 
 export const collections = {
     'writs': writsCollection,
-    'store': storeCollection
 }

@@ -41,12 +41,11 @@ Migrated to **Astro 7 / Tailwind CSS 4 / daisyUI 5 / React 19** (mi897/mi897.git
 ## Architecture
 
 - **Global config**: `src/config.ts` holds site title, name, social links, email, and two feature flags:
-  - `GENERATE_SLUG_FROM_TITLE` — if true, post/store URLs are derived from the frontmatter `title` via `src/lib/createSlug.ts`, not the filename. Any page linking to a writ (list, tag pages, `rss.xml.js`) must go through `createSlug(entry.data.title, entry.id)` to stay consistent. Store item URLs use `entry.id` (the filename).
+  - `GENERATE_SLUG_FROM_TITLE` — if true, post URLs are derived from the frontmatter `title` via `src/lib/createSlug.ts`, not the filename. Any page linking to a writ (list, tag pages, `rss.xml.js`) must go through `createSlug(entry.data.title, entry.id)` to stay consistent.
   - `TRANSITION_API` — toggles view transitions in layouts.
 - **Content collections** (`src/content/`, schemas and loaders in `src/content.config.ts`):
   - `writs` — blog posts (Markdown/MDX). Frontmatter: `title`, `description`, `pubDate` required; `heroImage`, `badge`, `tags` (must be unique), `updatedDate` optional.
-  - `store` — shop items; `custom_link_label` and `updatedDate` required.
-- **Routing** (`src/pages/`): each collection has `[...page].astro` (paginated list, 10 per page, newest first), `[slug].astro` (detail page), and writs also has `tag/[tag]/[...page].astro`. `cv-backend.astro` is the CV page built from `components/cv/TimeLine.astro`; `chillinW/curiosity.astro` is a standalone page.
-- **Layouts**: `BaseLayout.astro` (head, header, sidebar drawer, footer; daisyUI theme set via `data-theme="sunset"` on `<html>`), `PostLayout.astro` for writs, `StoreItemLayout.astro` for store items. Pages pass `sideBarActiveItemID`, which `SideBarMenu.astro` matches against menu item `id`s to highlight the active link.
+- **Routing** (`src/pages/`): `writs/` has `[...page].astro` (paginated list, 10 per page, newest first), `[slug].astro` (detail page) and `tag/[tag]/[...page].astro`. `cv-backend.astro` is the CV page built from `components/cv/TimeLine.astro`; `chillinW/curiosity.astro` is a standalone page.
+- **Layouts**: `BaseLayout.astro` (head, header, sidebar drawer, footer; daisyUI theme set via `data-theme="sunset"` on `<html>`), `PostLayout.astro` for writs. Pages pass `sideBarActiveItemID`, which `SideBarMenu.astro` matches against menu item `id`s to highlight the active link.
 - **Path aliases** (`tsconfig.json`): `@components/*`, `@layouts/*`.
 - Static assets (hero images, favicon, `curiosity-articles.json`) live in `public/` and are referenced by absolute path, e.g. `heroImage: "/post_img.png"`.
