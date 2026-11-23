@@ -1,0 +1,34 @@
+---
+import { formatDate } from "../../lib/research";
+interface Props { topic: string; dive: { slug: string; title: string; summary: string; started: string; scope: string }; }
+const { topic, dive } = Astro.props;
+// Tick totals come from the build; ticked counts come from this browser's localStorage (see script below).
+const fragments = import.meta.glob("../../data/research/*/deep-dives/*/*.html", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const metas = import.meta.glob("../../data/research/*/deep-dives/*/meta.json", { import: "default", eager: true }) as Record<string, { storageKey: string }>;
+const dir = `../../data/research/${topic}/deep-dives/${dive.slug}/`;
+const total = Object.entries(fragments).filter(([k]) => k.startsWith(dir)).reduce((n, [, h]) => n + (h.match(/data-key=/g) ?? []).length, 0);
+const storageKey = metas[`${dir}meta.json`]?.storageKey ?? "";
+---
+<a href={`/research/${topic}/deep-dives/${dive.slug}/`} class="card bg-base-200 hover:bg-base-300 transition-colors">
+  <div class="card-body p-5">
+    <div class="flex items-start justify-between gap-2">
+      <h2 class="card-title">Deep dive: {dive.title}</h2>
+      <span class="badge badge-primary">deep dive</span>
+    </div>
+    <p class="text-sm leading-relaxed">{dive.summary}</p>
+    <p class="text-xs opacity-60">Started {formatDate(dive.started)} · {dive.scope}</p>
+    <div class="flex items-center gap-3 text-xs" data-dive-progress data-store={storageKey} data-total={total}>
+      <progress class="progress progress-primary w-40" value="0" max={total}></progress>
+      <span data-dive-label>0 of {total} done</span>
+    </div>
+  </div>
+</a>
+<script>
+  // Runs once per page even if several cards render.
+  for (const el of document.querySelectorAll<HTMLElement>("[data-dive-progress]")) {
+    let done = 0;
+    try { done = Object.values(JSON.parse(localStorage.getItem(el.dataset.store ?? "") || "{}")).filter(Boolean).length; } catch {}
+    el.querySelector("progress")!.value = done;
+    el.querySelector("[data-dive-label]")!.textContent = `${done} of ${el.dataset.total} done`;
+  }
+</script>

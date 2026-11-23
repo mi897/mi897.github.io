@@ -1,8 +1,8 @@
 ---
-import meta from "../../data/research/latenttom-learning-plan/meta.json";
+import meta from "../../data/research/decentralized-robot-collaboration/deep-dives/latenttom/meta.json";
 interface Props { current?: string; }
 const { current } = Astro.props;
-const base = `/research/${meta.slug}/`;
+const base = meta.basePath;
 const tabs = [{ id: "", label: "Contents" }, ...meta.sections.map((s) => ({ id: s.id, label: (s as { tab?: string }).tab ?? s.label }))];
 ---
 <div role="tablist" class="tabs tabs-border overflow-x-auto flex-nowrap mb-6" aria-label="Study plan sections">
