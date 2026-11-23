@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import StudyNav from "../../../components/research/StudyNav.astro";
+import StudyProse from "../../../components/research/StudyProse.astro";
+import topics from "../../../data/research/topics.json";
+import meta from "../../../data/research/latenttom-learning-plan/meta.json";
+import { formatDate } from "../../../lib/research";
+
+const topic = topics.find((t) => t.slug === meta.slug)!;
+const fragments = import.meta.glob("../../../data/research/latenttom-learning-plan/*.html", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const total = (id: string) => (fragments[`../../../data/research/latenttom-learning-plan/${id}.html`].match(/data-key=/g) ?? []).length;
+const base = `/research/${meta.slug}/`;
+---
+
+<BaseLayout title={`${topic.title} · Research`} description={topic.summary} noindex wide>
+  <StudyProse />
+  <div class="study" data-store={meta.storageKey}>
+    <nav class="text-sm breadcrumbs mb-2"><ul><li><a href="/research/">Research</a></li><li>{topic.title}</li></ul></nav>
+    <h1 class="text-3xl font-bold mb-1">{topic.title}</h1>
+    <p class="opacity-60 text-sm mb-4">Rebuilding Latent Theory of Mind in a 2D simulation · {topic.scope} · updated {formatDate(meta.updated)}</p>
+    <StudyNav current="" />
+    <p class="lead">Pick a section below, or use the tabs above. Tick projects and gates as you finish them; your ticks stay in this browser.</p>
+    <p class="text-sm opacity-70">Paper: <a href="https://arxiv.org/abs/2505.09144">arXiv:2505.09144</a> · <a href="/research/decentralized-robot-collaboration/reading-list/#p-2505.09144">its entry in the reading list</a></p>
+    <div class="flex items-center gap-3 my-4"><span id="overall-label" class="text-sm">0 of 0 done</span><progress id="overall-bar" class="progress progress-primary max-w-xs" value="0" max="1"></progress></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Section</th><th>What it covers</th><th class="num">Hours</th><th class="num">Done</th></tr></thead>
+        <tbody>
+          {meta.sections.map((s) => (
+            <tr>
+              <td><a href={`${base}${s.id}/`}>{s.label}</a></td>
+              <td>{s.summary}</td>
+              <td class="num">{s.hours}</td>
+              <td class="num" data-count={s.id} data-total={total(s.id)}>{total(s.id) ? `0 / ${total(s.id)}` : ""}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="text-sm opacity-60">Hour counts are estimates, about 11 weeks at 8 hours a week.</p>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initStudyProgress } from "../../../lib/studyProgress";
+  initStudyProgress();
+</script>

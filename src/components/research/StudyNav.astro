@@ -1,0 +1,12 @@
+---
+import meta from "../../data/research/latenttom-learning-plan/meta.json";
+interface Props { current?: string; }
+const { current } = Astro.props;
+const base = `/research/${meta.slug}/`;
+const tabs = [{ id: "", label: "Contents" }, ...meta.sections.map((s) => ({ id: s.id, label: (s as { tab?: string }).tab ?? s.label }))];
+---
+<div role="tablist" class="tabs tabs-border overflow-x-auto flex-nowrap mb-6" aria-label="Study plan sections">
+  {tabs.map((t) => (
+    <a role="tab" href={t.id ? `${base}${t.id}/` : base} class:list={["tab whitespace-nowrap", (current ?? "") === t.id && "tab-active"]} aria-current={(current ?? "") === t.id ? "page" : undefined}>{t.label}</a>
+  ))}
+</div>

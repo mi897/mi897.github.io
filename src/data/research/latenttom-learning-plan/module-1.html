@@ -1,0 +1,16 @@
+  <h2>Module 1: Diffusion models and diffusion policy <span class="hours">about 12 hours</span></h2>
+  <p class="lead">Diffusion policy treats action generation as denoising, so one network can represent several valid ways to do the same task. LatentToM's per-arm policies are diffusion policies, and its code is a fork of the Diffusion Policy repository.</p>
+  <h3>What to learn</h3>
+  <ul>
+    <li>The forward noising process, the noise-prediction loss below, and sampling. Then DDIM, which cuts the number of inference steps.</li>
+    <li>Conditioning: the denoiser receives an observation embedding and the noise level k.</li>
+    <li>Action chunking: predict a horizon of future actions, execute the first few, then re-plan.</li>
+  </ul>
+<pre class="math">L = E over (k, ε, a⁰) of ‖ ε − ε_θ( √ᾱ_k · a⁰ + √(1 − ᾱ_k) · ε,  k,  o ) ‖²</pre>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m1p1"><span><span class="t">Toy DDPM</span> <span class="h">3 h</span><br>Train an unconditional DDPM on a 2D two-moons or swiss-roll dataset in PyTorch. Deliverable: a plot of samples over the true data.</span></label></li>
+    <li><label><input type="checkbox" data-key="m1p2"><span><span class="t">Conditional action diffusion</span> <span class="h">4 h</span><br>A point agent must reach a goal around a central obstacle, and your demonstrations go left or right half the time. Train an MSE regressor and a diffusion model on the same demos. Deliverable: trajectory plots and success rates.</span></label></li>
+    <li><label><input type="checkbox" data-key="m1p3"><span><span class="t">Read and run Diffusion Policy</span> <span class="h">5 h</span><br>Train the Push-T low-dimensional config from the official repo. Read how it builds the noise scheduler, the conditional U-Net and the EMA weights. Deliverable: your own one-page code map.</span></label></li>
+  </ul>
+  <div class="gate"><label><input type="checkbox" data-key="m1g"><span><b>Gate.</b> Explain why the MSE model drives straight into the obstacle while diffusion commits to one side, and show it in project 2.</span></label></div>

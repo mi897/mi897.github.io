@@ -1,0 +1,25 @@
+  <h2>Overview: what you are rebuilding</h2>
+  <p class="lead">LatentToM lets two robot arms cooperate without a central controller, and this plan has you rebuild it in a 2D simulation in about 90 hours. The original used two real arms and a real camera rig, so every project here uses a simulated stand-in.</p>
+  <h3>How a decision flows</h3>
+  <ol>
+    <li>Each arm sees two inputs: its own wrist camera plus pose (ego), and one shared third-person camera (consensus).</li>
+    <li>Two encoders turn these into an ego embedding and a consensus embedding.</li>
+    <li>In training only, a cohomology loss pulls the arms' consensus embeddings together. A theory-of-mind decoder and a confidence-based directional loss keep those embeddings informative.</li>
+    <li>Each arm's own diffusion policy turns its embeddings into an action chunk.</li>
+    <li>At run time, if the arms can communicate, they swap consensus embeddings and average them for T rounds. That is the sheaf Laplacian update.</li>
+  </ol>
+  <h3>Where you start</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Area</th><th>Your starting point</th><th>Gap to close</th></tr></thead>
+      <tbody>
+        <tr><td>Engineering</td><td>Software engineering background</td><td>Research-scale training loops, configs, experiment tracking</td></tr>
+        <tr><td>Policy learning</td><td>Advanced RL topics</td><td>Imitation learning and action chunking</td></tr>
+        <tr><td>Generative models</td><td>Machine learning courses</td><td>DDPM math and conditioning on observations</td></tr>
+        <tr><td>Multi-agent systems</td><td>Multi-agent course, Boids</td><td>Learned consensus; Boids alignment is a hand-written consensus rule</td></tr>
+        <tr><td>Sheaf theory</td><td>Not yet</td><td>Cellular sheaves, coboundary, Laplacian (Module 4)</td></tr>
+        <tr><td>Robot vision</td><td>Not yet</td><td>Visual encoders, camera setups, simulators</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The hour counts are my estimates: about 90 hours total, or 11 weeks at 8 hours a week.</p>

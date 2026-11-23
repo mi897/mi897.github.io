@@ -1,0 +1,20 @@
+  <h2>Module 5: Cohomology loss, ToM decoders, avoiding collapse <span class="hours">about 14 hours</span></h2>
+  <p class="lead">This module adds the three auxiliary training terms: the cohomology loss pulls consensus embeddings together, the theory-of-mind decoder keeps them informative, and the directional loss decides which arm moves toward which. You build them first on a toy problem, where failures are cheap to see.</p>
+<pre class="math">L_tot = α · L_nc + β · L_tom + γ · L_conf</pre>
+  <p>The paper reports no values for alpha, beta or gamma. Its equation also leaves out the diffusion denoising loss, which is presumably added separately.</p>
+  <h3>What each term does, per the paper</h3>
+  <ul>
+    <li><b>Cohomology loss (L_nc).</b> Summed squared difference between the two consensus embeddings on each edge.</li>
+    <li><b>ToM loss (L_tom).</b> For each ordered pair of arms, a multi-head attention decoder uses arm u's consensus embedding as the query and arm v's ego embedding as keys and values. It regresses v's true ego embedding with a squared L2 loss. Each direction has its own network.</li>
+    <li><b>Confidence and directional loss (L_conf).</b> A small network outputs a confidence between 0 and 1 for each arm. The lower-confidence embedding is pulled toward the higher-confidence one, and each edge's error is scaled by 1 plus the confidence gap. An entropy term keeps confidences away from 0 and 1 early in training.</li>
+  </ul>
+  <div class="note">Why L_nc alone fails (my reasoning, not the paper's): two constant embeddings agree perfectly, so the cheapest way to reduce the loss is to throw away all information. The ToM term forces the consensus embedding to still predict something about the partner.</div>
+  <p>Open points to resolve yourself: read literally, the paper's decoder receives the true target as keys and values, which would let it copy the answer, and the indicator functions in the directional loss are not differentiable. Check the paper's equations and the official code, then record your choice.</p>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m5p1"><span><span class="t">Cohomology loss alone</span> <span class="h">3 h</span><br>Generate a hidden state z, such as a block pose, and two noisy renderings of it. Train two encoders with L_nc only. Plot embedding variance and effective rank over training and watch them collapse.</span></label></li>
+    <li><label><input type="checkbox" data-key="m5p2"><span><span class="t">Add the ToM decoder</span> <span class="h">4 h</span><br>Implement both directions with attention. Show that variance survives and that a linear probe still recovers z from the consensus embedding. Write down how you avoided target leakage.</span></label></li>
+    <li><label><input type="checkbox" data-key="m5p3"><span><span class="t">Confidence and directional loss</span> <span class="h">4 h</span><br>Build the shared trunk with a sigmoid head per arm. Stop gradients through the higher-confidence embedding, which is my suggestion. Degrade one arm's view and check that its confidence drops and its embedding moves toward the clean arm's.</span></label></li>
+    <li><label><input type="checkbox" data-key="m5p4"><span><span class="t">Weight sweep</span> <span class="h">3 h</span><br>Run a small grid over alpha, beta and gamma. Score each setting on agreement, probe accuracy and variance.</span></label></li>
+  </ul>
+  <div class="gate"><label><input type="checkbox" data-key="m5g"><span><b>Gate.</b> An ablation table with three rows (L_nc only, plus ToM, plus directional) showing collapse in the first row and the effect of each added term.</span></label></div>

@@ -1,0 +1,16 @@
+  <h2>Module 2: Imitation learning and your testbed <span class="hours">about 15 hours</span></h2>
+  <p class="lead">This module builds the testbed: a two-agent Push-T simulator, an expert that produces demonstrations, and a centralized diffusion policy (CDP) that serves as your upper bound. The paper's own CDP baseline plays the same role.</p>
+  <h3>What to learn</h3>
+  <ul>
+    <li>Behavior cloning and compounding error. You know DAgger from RL, so treat this as the supervised view of the same problem.</li>
+    <li>Action chunking, as in ACT and ALOHA, and why it reduces compounding error.</li>
+    <li>Image encoders for policies: ResNet-18 with GroupNorm instead of BatchNorm, as Diffusion Policy does.</li>
+    <li>How the official repo stores demonstrations (a zarr replay buffer) and samples training windows.</li>
+  </ul>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m2p1"><span><span class="t">Duo-Push-T simulator</span> <span class="h">6 h</span><br>Build it in pymunk: two circular pushers, one T-shaped block, a goal pose, and higher friction on one side of the table. Render two observation types, mirroring the paper's split. The global top-down image is the consensus view. A crop centered on each pusher, plus its position, is the ego view. This is my 2D analogue of the paper's setup, not the paper's own environment.</span></label></li>
+    <li><label><input type="checkbox" data-key="m2p2"><span><span class="t">Expert and data</span> <span class="h">4 h</span><br>The easiest automatic expert is a random-shooting MPC that uses the simulator's true state. Record a few hundred demonstrations. The paper does not state its demonstration count, so pick a number and keep it fixed across all methods.</span></label></li>
+    <li><label><input type="checkbox" data-key="m2p3"><span><span class="t">Centralized diffusion policy</span> <span class="h">5 h</span><br>One diffusion policy outputs both pushers' actions jointly, conditioned on the global image and both local views. Deliverable: success rate over 50 rollouts, where success is block-goal overlap above a threshold you fix in advance.</span></label></li>
+  </ul>
+  <div class="gate"><label><input type="checkbox" data-key="m2g"><span><b>Gate.</b> CDP reaches your target success rate. Everything later is measured against it.</span></label></div>

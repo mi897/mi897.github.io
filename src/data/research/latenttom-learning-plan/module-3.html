@@ -1,0 +1,16 @@
+  <h2>Module 3: Ego and consensus embeddings <span class="hours">about 8 hours</span></h2>
+  <p class="lead">Here you split each agent's observation in two and train the decentralized baseline that LatentToM must beat. The paper splits each arm's observation into an ego part and a consensus part, and gives each its own visual encoder.</p>
+  <h3>What to learn</h3>
+  <ul>
+    <li>The ego input is the end-effector camera plus the arm's pose. The consensus input is the fixed third-person camera that sees the shared workspace.</li>
+    <li>The two encoders produce an ego embedding and a consensus embedding. The paper does not give their dimensions, so pick one (128 is a fine start) and keep it fixed.</li>
+    <li>Why split: ego information is private to one arm, while consensus information describes the shared scene, so the arms can be asked to agree on it.</li>
+    <li>Optional background: contrastive losses such as InfoNCE are another way to align two views, and a useful comparison for Module 5.</li>
+  </ul>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m3p1"><span><span class="t">Two-encoder wiring</span> <span class="h">3 h</span><br>For each agent, build an ego encoder and a consensus encoder, concatenate their outputs, and condition that agent's own diffusion policy on the result. Each policy outputs only its own agent's actions. No auxiliary losses yet.</span></label></li>
+    <li><label><input type="checkbox" data-key="m3p2"><span><span class="t">Naive decentralized baseline, NDDP</span> <span class="h">3 h</span><br>Train both agents independently with only the diffusion loss. Evaluate on the same 50 rollouts as CDP. The paper saw a large gap on its coffee task, 7 of 15 for NDDP against 15 of 15 for CDP, so expect one in your simulator too.</span></label></li>
+    <li><label><input type="checkbox" data-key="m3p3"><span><span class="t">Agreement probe</span> <span class="h">2 h</span><br>At every timestep, record the cosine similarity between the two agents' consensus embeddings. Also fit a linear probe from each consensus embedding to the block's pose. These two numbers are your measuring stick in Module 5.</span></label></li>
+  </ul>
+  <div class="gate"><label><input type="checkbox" data-key="m3g"><span><b>Gate.</b> NDDP is clearly worse than CDP, and your baseline agreement and probe numbers are written down.</span></label></div>
