@@ -2,22 +2,54 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import topics from "../../data/research/topics.json";
 import { formatDate } from "../../lib/research";
+
+// kind "study" = a deep dive with a learning plan and projects; "survey" = a literature review with a reading list and log.
+const groups = [
+  { kind: "study", heading: "Deep dives", blurb: "Structured study tracks: learn the theory, then rebuild the work in code.", cta: "Open study plan" },
+  { kind: "survey", heading: "Literature reviews", blurb: "Reading lists and a dated log for areas I'm surveying.", cta: "Open reading list and log" },
+].map((g) => ({ ...g, items: topics.filter((t) => t.kind === g.kind) })).filter((g) => g.items.length);
 ---
 
-<BaseLayout title="Research" description="Research topics and reading lists" noindex>
+<BaseLayout title="Research" description="Research topics, deep dives and reading lists" noindex>
   <h1 class="text-3xl font-bold mb-2">Research</h1>
-  <p class="opacity-70 mb-8">Topics I'm studying.</p>
-  <ul class="grid gap-4">
-    {topics.map((t) => (
-      <li>
-        <a href={`/research/${t.slug}/`} class="card bg-base-200 hover:bg-base-300 transition-colors shadow-sm">
-          <div class="card-body p-5">
-            <h2 class="card-title">{t.title}</h2>
-            <p class="text-sm leading-relaxed">{t.summary}</p>
-            <p class="text-xs opacity-60">Started {formatDate(t.started)} · {t.scope}</p>
-          </div>
-        </a>
-      </li>
-    ))}
-  </ul>
+  <p class="opacity-70 mb-8">What I'm studying, and how.</p>
+  {groups.map((g) => (
+    <section class="mb-10">
+      <h2 class="text-xl font-bold">{g.heading}</h2>
+      <p class="text-sm opacity-70 mb-4">{g.blurb}</p>
+      <ul class="grid gap-4">
+        {g.items.map((t) => (
+          <li>
+            <a href={`/research/${t.slug}/`} class="card bg-base-200 hover:bg-base-300 transition-colors shadow-sm">
+              <div class="card-body p-5">
+                <div class="flex items-start justify-between gap-2">
+                  <h3 class="card-title">{t.title}</h3>
+                  <span class={`badge ${t.kind === "study" ? "badge-primary" : "badge-ghost"}`}>{t.kind === "study" ? "deep dive" : "survey"}</span>
+                </div>
+                <p class="text-sm leading-relaxed">{t.summary}</p>
+                <p class="text-xs opacity-60">Started {formatDate(t.started)} · {t.scope}</p>
+                {t.kind === "study" && (
+                  <div class="flex items-center gap-3 text-xs" data-study-card={t.slug}>
+                    <progress class="progress progress-primary w-40" value="0" max="31"></progress>
+                    <span data-study-label>0 of 31 done</span>
+                  </div>
+                )}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </BaseLayout>
+
+<script>
+  // Show tick progress for study plans from this browser's saved state.
+  const card = document.querySelector<HTMLElement>('[data-study-card="latenttom-learning-plan"]');
+  if (card) {
+    let done = 0;
+    try { done = Object.values(JSON.parse(localStorage.getItem("latenttom-plan-progress") || "{}")).filter(Boolean).length; } catch {}
+    card.querySelector("progress")!.value = done;
+    card.querySelector("[data-study-label]")!.textContent = `${done} of 31 done`;
+  }
+</script>

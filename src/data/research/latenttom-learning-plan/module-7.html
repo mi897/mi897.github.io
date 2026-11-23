@@ -1,0 +1,27 @@
+  <h2>Module 7: Full recreation, evaluation, ablations <span class="hours">about 21 hours</span></h2>
+  <p class="lead">Here you combine everything into one training pipeline and test the paper's claims in your simulator. The paper leaves many details open, so you will make and record these choices yourself. The defaults below are approximate and come from my memory of Diffusion Policy; check them against its configs.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Not specified in the paper</th><th>Suggested starting default</th><th>How to settle it</th></tr></thead>
+      <tbody>
+        <tr><td>Denoiser backbone</td><td>1D conditional CNN U-Net, as in Diffusion Policy</td><td>Keep identical across all methods</td></tr>
+        <tr><td>Action space</td><td>Absolute target positions per pusher</td><td>Matches Push-T convention</td></tr>
+        <tr><td>Chunk length</td><td>Predict 16 steps, execute 8</td><td>Sweep only if CDP struggles</td></tr>
+        <tr><td>Diffusion steps</td><td>100 for training, about 10 DDIM steps to sample</td><td>Follow the official config</td></tr>
+        <tr><td>Embedding dimensions</td><td>128 for ego and consensus</td><td>Compare probe accuracy at 64 and 256</td></tr>
+        <tr><td>Loss weights and entropy weight</td><td>Grid from Module 5</td><td>Pick by downstream success</td></tr>
+        <tr><td>Eta and T</td><td>Eta 0.25 to 0.5, T 1 to 3</td><td>Module 6 sweep</td></tr>
+        <tr><td>Restriction maps in training</td><td>Identity first, then learned linear maps</td><td>Compare, and watch for collapse</td></tr>
+        <tr><td>Number of demonstrations</td><td>One fixed count, such as 200</td><td>Same for every method</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m7p1"><span><span class="t">Integrated pipeline</span> <span class="h">8 h</span><br>One config-driven training script with a switch for each term: cohomology, ToM, directional, and the inference-time Laplacian. Use your engineering strengths here: fixed seeds, logging, checkpointing, one command per experiment.</span></label></li>
+    <li><label><input type="checkbox" data-key="m7p2"><span><span class="t">Evaluation harness</span> <span class="h">4 h</span><br>Run every method on the same 50 or more fixed initial conditions: CDP, NDDP, LatentToM, and LatentToM with the Laplacian. Report success with Wilson intervals. Add the paper's naive consensus baseline (NCDDP) once you have read its definition in the paper.</span></label></li>
+    <li><label><input type="checkbox" data-key="m7p3"><span><span class="t">Ablation report</span> <span class="h">5 h</span><br>Remove each component in turn and vary the friction asymmetry. The paper has no formal ablation table, so this goes beyond it. Write two pages on what your simulator confirmed and what it did not.</span></label></li>
+    <li><label><input type="checkbox" data-key="m7p4"><span><span class="t">Official code (optional)</span> <span class="h">4 h</span><br>The repo provides only the coffee-bean data. Train it with the <code>sheaf_xarm_split_diffusion_workspace</code> config and compare its code and loss curves with yours. You cannot evaluate it without the arms.</span></label></li>
+  </ul>
+  <p>One reading caution: the paper's 46.7% advantage over NDDP is the gap between 14 of 15 and 7 of 15, which is 46.7 percentage points, not a 46.7% relative improvement.</p>
+  <div class="gate"><label><input type="checkbox" data-key="m7g"><span><b>Gate.</b> You can explain every term in the loss, and your report states which of the paper's claims your simulator supports.</span></label></div>

@@ -1,0 +1,16 @@
+  <h2>Roadmap at a glance</h2>
+  <p class="lead">Seven modules, each ending in a gate you must pass before moving on. Modules 1, 2 and 4 are independent, so you can alternate if one drags. Module 3 needs 1 and 2, Module 5 needs 3 and 4, Module 6 needs 5, and Module 7 needs everything.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="num">#</th><th>Module</th><th>You build</th><th>Gate</th><th class="num">Hours</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td><a href="/research/latenttom-learning-plan/module-1/">Diffusion policy</a></td><td>Toy DDPM, then a conditional action-diffusion model</td><td>Diffusion beats MSE regression on a two-path task</td><td class="num">12</td></tr>
+        <tr><td class="num">2</td><td><a href="/research/latenttom-learning-plan/module-2/">Imitation learning</a></td><td>Two-agent Push-T simulator, scripted expert, centralized diffusion policy (CDP)</td><td>CDP succeeds in at least 80% of rollouts (my target, adjust it)</td><td class="num">15</td></tr>
+        <tr><td class="num">3</td><td><a href="/research/latenttom-learning-plan/module-3/">Ego and consensus embeddings</a></td><td>Split encoders, naive decentralized baseline (NDDP)</td><td>NDDP is clearly worse than CDP</td><td class="num">8</td></tr>
+        <tr><td class="num">4</td><td><a href="/research/latenttom-learning-plan/module-4/">Sheaf theory</a></td><td>NumPy sheaf Laplacian, frame-mismatch demo, 3-cycle obstruction</td><td>Derive the loss and Theorem 1 by hand</td><td class="num">12</td></tr>
+        <tr><td class="num">5</td><td><a href="/research/latenttom-learning-plan/module-5/">Losses</a></td><td>Cohomology loss, ToM decoder, confidence and directional loss</td><td>Ablation showing collapse without the ToM term</td><td class="num">14</td></tr>
+        <tr><td class="num">6</td><td><a href="/research/latenttom-learning-plan/module-6/">Laplacian inference</a></td><td>Update loop, eta and T sweep, message-dropout test</td><td>LatentToM with Laplacian at least matches LatentToM, and both beat NDDP, over 50+ rollouts</td><td class="num">8</td></tr>
+        <tr><td class="num">7</td><td><a href="/research/latenttom-learning-plan/module-7/">Full recreation</a></td><td>Integrated training, evaluation, ablations, optional official-data run</td><td>A written ablation report</td><td class="num">21</td></tr>
+      </tbody>
+    </table>
+  </div>

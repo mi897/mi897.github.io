@@ -1,0 +1,23 @@
+  <h2>Module 4: Sheaf theory for engineers <span class="hours">about 12 hours</span></h2>
+  <p class="lead">A cellular sheaf on a graph says that each node holds data and each edge states how its two endpoints' data must relate, and all the paper's math follows from one matrix, the coboundary. You need only linear algebra here, no algebraic topology background.</p>
+  <h3>What to learn</h3>
+  <ul>
+    <li><b>Stalks and restriction maps.</b> Each node and edge gets a vector space. Each node has a linear map into the space of each edge it touches.</li>
+    <li><b>Coboundary.</b> For an edge between u and v, the coboundary measures their disagreement after translation into the edge space.</li>
+    <li><b>Global sections.</b> Assignments with zero disagreement on every edge form the kernel of the coboundary. The kernel is called H⁰.</li>
+    <li><b>Laplacian.</b> The sheaf Laplacian is the coboundary transposed times itself, and its energy is the total squared disagreement.</li>
+    <li><b>Diffusion.</b> Repeatedly stepping x to x minus eta times L x drives the system toward a global section.</li>
+  </ul>
+<pre class="math">(δx)(e) = ρ_{u→e} x_u − ρ_{v→e} x_v
+L = δᵀδ
+xᵀ L x = Σ over edges e=(u,v) of ‖ ρ_{u→e} x_u − ρ_{v→e} x_v ‖²</pre>
+  <p>The last expression is exactly the paper's L_nc. The paper calls it a first-order cohomology loss, but it is the squared size of the coboundary, an energy, and it never computes H¹.</p>
+  <p>The Boids link: a boid steering toward its neighbors' average heading is graph-Laplacian consensus with the trivial sheaf. A sheaf adds a translation on each edge, for example when two agents use different reference frames.</p>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m4p1"><span><span class="t">Build the Laplacian</span> <span class="h">3 h</span><br>In NumPy, take a graph, stalk sizes and restriction matrices, and assemble the coboundary and L. Check that two nodes with identity maps give the matrix with rows [1, -1] and [-1, 1] from the paper, and that xᵀLx equals the squared coboundary norm.</span></label></li>
+    <li><label><input type="checkbox" data-key="m4p2"><span><span class="t">Frame mismatch</span> <span class="h">3 h</span><br>Give agent v a known rotation R relative to agent u, so the maps are the identity for u and R for v. Run the diffusion step. It should converge to x_u equal to R x_v, not to equal vectors. This shows what the paper's identity-map simplification gives up.</span></label></li>
+    <li><label><input type="checkbox" data-key="m4p3"><span><span class="t">Cycle obstruction</span> <span class="h">3 h</span><br>Put three nodes in a triangle with 2D rotations of 30 degrees on each edge. Compute the kernel of the coboundary. It is only the zero vector, because three 30-degree turns make a 90-degree turn that fixes no nonzero vector. Local agreement cannot be glued into a global one, which is what a nonzero H¹ captures.</span></label></li>
+    <li><label><input type="checkbox" data-key="m4p4"><span><span class="t">Boids bridge</span> <span class="h">3 h</span><br>Rewrite your Boids alignment rule as Laplacian consensus on the proximity graph. Then give each edge a rotation and observe the difference.</span></label></li>
+  </ul>
+  <div class="gate"><label><input type="checkbox" data-key="m4g"><span><b>Gate.</b> Derive three results on paper. First, the loss equals the squared norm of the coboundary. Second, with identity maps one update is the matrix I minus eta L from the paper. Third, for two nodes the gap between them shrinks by a factor of 1 minus 2 eta each step.</span></label></div>

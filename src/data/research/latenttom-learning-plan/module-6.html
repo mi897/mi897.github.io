@@ -1,0 +1,17 @@
+  <h2>Module 6: Decentralized execution and Laplacian inference <span class="hours">about 8 hours</span></h2>
+  <p class="lead">At run time the arms either act alone or swap consensus embeddings and average them, and that update is simple enough to analyze completely. Both modes use the same trained policies, and the second needs no retraining.</p>
+  <h3>The two modes in the paper</h3>
+  <ul>
+    <li><b>No communication.</b> Fully decentralized. Each arm sees only its own sensors, which include a view of the other arm.</li>
+    <li><b>With communication.</b> Before each inference step the arms exchange consensus embeddings once, then apply the update below for T iterations. The paper does not report eta or T.</li>
+  </ul>
+<pre class="math">h_u ← (1 − η) h_u + η h_v
+h_v ← (1 − η) h_v + η h_u</pre>
+  <p>Two facts to derive yourself. The sum of the two embeddings never changes, so the pair keeps its midpoint. The gap between them is multiplied by 1 minus 2 eta each round, so eta of 0.5 closes it in one step. With two arms, one exchange gives both sides everything they need to run all T rounds locally. That last point is my inference from the paper's description.</p>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m6p1"><span><span class="t">Update loop</span> <span class="h">2 h</span><br>Implement the update and unit-test it against the closed form for the midpoint and the gap.</span></label></li>
+    <li><label><input type="checkbox" data-key="m6p2"><span><span class="t">Eta and T sweep</span> <span class="h">3 h</span><br>Freeze the model from Module 5. Try eta of 0.1, 0.25 and 0.5 with T of 1, 2 and 5, using 50 rollouts per setting. Plot embedding gap against success rate.</span></label></li>
+    <li><label><input type="checkbox" data-key="m6p3"><span><span class="t">Failure tests</span> <span class="h">3 h</span><br>Drop each message with probability p and fall back to the arm's own embedding. Degrade one arm's view and check whether plain averaging helps or hurts. Then try a confidence-weighted average, which is my extension and not in the paper.</span></label></li>
+  </ul>
+  <div class="gate"><label><input type="checkbox" data-key="m6g"><span><b>Gate.</b> Over 50 or more rollouts, the Laplacian version at least matches plain LatentToM and both beat NDDP. Report 95% confidence intervals. The paper's 13 of 15 against 14 of 15 on the coffee task has Wilson intervals of roughly 0.62 to 0.96 and 0.70 to 0.99, which overlap almost completely.</span></label></div>
