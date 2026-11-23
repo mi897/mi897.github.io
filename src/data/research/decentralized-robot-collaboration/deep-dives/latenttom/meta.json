@@ -1,5 +1,5 @@
 {
-  "slug": "latenttom-learning-plan",
+  "slug": "latenttom",
   "title": "LatentToM learning plan",
   "storageKey": "latenttom-plan-progress",
   "updated": "2026-11-20",
@@ -79,5 +79,6 @@
       "summary": "Pages opened and reading by module",
       "hours": 0
     }
-  ]
+  ],
+  "basePath": "/research/decentralized-robot-collaboration/deep-dives/latenttom/"
 }

@@ -13,6 +13,7 @@ export interface Paper {
   status: Status;
   added: string; // YYYY-MM-DD
   my_notes: string;
+  deep_dive?: string; // slug of a deep dive in deep-dives.json
 }
 
 export interface LogEntry {

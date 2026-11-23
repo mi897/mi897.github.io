@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../../../../layouts/BaseLayout.astro";
+import StudyNav from "../../../../../components/research/StudyNav.astro";
+import StudyProse from "../../../../../components/research/StudyProse.astro";
+import topics from "../../../../../data/research/topics.json";
+import diveData from "../../../../../data/research/decentralized-robot-collaboration/deep-dives/deep-dives.json";
+import meta from "../../../../../data/research/decentralized-robot-collaboration/deep-dives/latenttom/meta.json";
+
+export function getStaticPaths() {
+  return meta.sections.map((s, i) => ({ params: { section: s.id }, props: { i } }));
+}
+const { section } = Astro.params;
+const { i } = Astro.props;
+const s = meta.sections[i];
+const fragments = import.meta.glob("../../../../../data/research/decentralized-robot-collaboration/deep-dives/latenttom/*.html", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const html = fragments[`../../../../../data/research/decentralized-robot-collaboration/deep-dives/latenttom/${section}.html`];
+const parent = topics.find((t) => t.slug === "decentralized-robot-collaboration")!;
+const dive = diveData.dives.find((d) => d.slug === meta.slug)!;
+// The "Deep dives" list page only appears in the trail once there is more than one deep dive.
+const listCrumb = diveData.dives.length > 1;
+const base = meta.basePath;
+const prev = i > 0 ? meta.sections[i - 1] : null;
+const next = i < meta.sections.length - 1 ? meta.sections[i + 1] : null;
+---
+
+<BaseLayout title={`${s.label} · ${dive.title}`} description={s.summary} noindex wide>
+  <StudyProse />
+  <div class="study" data-store={meta.storageKey}>
+    <nav class="text-sm breadcrumbs mb-2"><ul><li><a href="/research/">Research</a></li><li><a href="/research/decentralized-robot-collaboration/">{parent.title}</a></li>{listCrumb && <li><a href="/research/decentralized-robot-collaboration/deep-dives/">Deep dives</a></li>}<li><a href={base}>{dive.title}</a></li><li>{s.label}</li></ul></nav>
+    <StudyNav current={s.id} />
+    <div set:html={html} />
+    <div class="flex justify-between gap-3 mt-10 pt-4 border-t border-base-300">
+      {prev ? <a class="link" href={`${base}${prev.id}/`}>← {prev.label}</a> : <a class="link" href={base}>← Contents</a>}
+      {next ? <a class="link" href={`${base}${next.id}/`}>{next.label} →</a> : <span></span>}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initStudyProgress } from "../../../../../lib/studyProgress";
+  initStudyProgress();
+</script>

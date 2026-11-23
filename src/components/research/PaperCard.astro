@@ -1,7 +1,9 @@
 ---
 import { statusBadge, type Paper } from "../../lib/research";
+import diveData from "../../data/research/decentralized-robot-collaboration/deep-dives/deep-dives.json";
 interface Props { paper: Paper; }
 const { paper } = Astro.props;
+const dive = paper.deep_dive ? diveData.dives.find((d) => d.slug === paper.deep_dive) : undefined;
 const search = [paper.title, paper.authors, paper.arxiv_id, paper.abstract, paper.conclusion ?? "", paper.note ?? ""].join(" ").toLowerCase();
 ---
 
@@ -16,6 +18,7 @@ const search = [paper.title, paper.authors, paper.arxiv_id, paper.abstract, pape
       <a class="link link-primary" href={paper.url} target="_blank" rel="noopener noreferrer">arXiv:{paper.arxiv_id} ↗</a>
     </p>
     {paper.note && <p class="text-sm italic opacity-80">{paper.note}</p>}
+    {dive && <p><a class="btn btn-sm btn-primary" href={`/research/decentralized-robot-collaboration/deep-dives/${dive.slug}/`}>Deep dive: {dive.title} →</a></p>}
     <div class="grid gap-4 md:grid-cols-2">
       <section>
         <h4 class="text-xs font-semibold uppercase tracking-wide opacity-60 mb-1">Abstract</h4>

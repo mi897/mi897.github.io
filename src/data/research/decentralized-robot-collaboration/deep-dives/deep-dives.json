@@ -1,0 +1,13 @@
+{
+  "description": "Longer, hands-on studies of single papers or methods that came out of this research: learn the theory, rebuild the work in code, then test an extension of my own.",
+  "dives": [
+    {
+      "slug": "latenttom",
+      "title": "LatentToM learning plan",
+      "paper": "2505.09144",
+      "summary": "Rebuild Latent Theory of Mind in a 2D two-pusher simulation. Seven modules from diffusion policy through sheaf theory to a full ablation report, plus an optional extension that removes the shared third-person camera to see whether the arms can still reach consensus.",
+      "started": "2026-11-20",
+      "scope": "About 90 hours, roughly 11 weeks at 8 hours a week"
+    }
+  ]
+}

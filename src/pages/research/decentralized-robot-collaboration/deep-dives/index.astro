@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import DiveCard from "../../../../components/research/DiveCard.astro";
+import topics from "../../../../data/research/topics.json";
+import diveData from "../../../../data/research/decentralized-robot-collaboration/deep-dives/deep-dives.json";
+
+const topic = topics.find((t) => t.slug === "decentralized-robot-collaboration")!;
+---
+
+<BaseLayout title={`Deep dives · ${topic.title}`} description={diveData.description} noindex wide>
+  <nav class="text-sm breadcrumbs mb-2"><ul><li><a href="/research/">Research</a></li><li><a href="../">{topic.title}</a></li><li>Deep dives</li></ul></nav>
+  <h1 class="text-3xl font-bold mb-2">Deep dives</h1>
+  <p class="leading-relaxed mb-8 max-w-[68ch]">{diveData.description}</p>
+  <div class="grid gap-4">
+    {diveData.dives.map((d) => <DiveCard topic={topic.slug} dive={d} />)}
+  </div>
+</BaseLayout>
