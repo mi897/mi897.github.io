@@ -1,0 +1,28 @@
+  <h2>Module 8: Extension, consensus without a shared camera <span class="hours">about 10 hours, optional</span></h2>
+  <p class="lead">In the paper, the consensus embedding comes from a fixed third-person camera that both arms see. This extension asks whether the arms can still reach useful consensus when that camera is removed, so the only way to agree is through what each arm sees of the shared scene from its own viewpoint. It is my own research question, not something the paper tests, and it is not counted in the 90 hours.</p>
+  <h3>What to learn</h3>
+  <ul>
+    <li>What the consensus encoder is actually given. Re-read the paper and the official code to confirm which inputs feed the consensus branch, and what each arm's own sensors can see of the other arm and of the object.</li>
+    <li>Why the third-person view helps: both arms get nearly the same input, so agreement is easy. Without it, each arm sees a different, partial view and agreement has to be learned through the loss, which is where the cohomology and ToM terms are tested.</li>
+    <li>The measuring tools from Module 3: embedding agreement and the linear probe to block pose.</li>
+  </ul>
+  <div class="note">My hypotheses, to be tested rather than assumed: removing the camera lowers success most for the naive baseline; the cohomology and ToM terms recover some of the gap by forcing both arms to encode the same scene state; and the Laplacian update helps most when one arm's view of the block is poor.</div>
+  <h3>Variants to compare</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Variant</th><th>Consensus input</th><th>Training terms</th></tr></thead>
+      <tbody>
+        <tr><td>A. Reference</td><td>Global top-down image (Module 7)</td><td>All terms</td></tr>
+        <tr><td>B. No camera, same losses</td><td>Wider crop around the arm, so it can still see the block and its partner</td><td>All terms</td></tr>
+        <tr><td>C. No camera, no agreement</td><td>Same as B</td><td>Diffusion loss only (this is NDDP without the camera)</td></tr>
+        <tr><td>D. No camera, tight crop</td><td>A small crop that often misses the block</td><td>All terms</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Projects</h3>
+  <ul class="checks">
+    <li><label><input type="checkbox" data-key="m8p1"><span><span class="t">Remove the camera</span> <span class="h">3 h</span><br>Add a config switch to your Module 7 pipeline that replaces the global image with a per-arm view, as in variants B to D. Keep the encoder sizes, demonstrations and seeds identical across variants.</span></label></li>
+    <li><label><input type="checkbox" data-key="m8p2"><span><span class="t">Measure agreement</span> <span class="h">3 h</span><br>For each variant, record the cosine similarity between the two arms' consensus embeddings and the linear probe to block pose from each arm. Check variance and effective rank to catch collapse, since agreement alone can be reached by throwing information away.</span></label></li>
+    <li><label><input type="checkbox" data-key="m8p3"><span><span class="t">Success and Laplacian inference</span> <span class="h">4 h</span><br>Run 50 or more fixed initial conditions per variant, with and without the Laplacian update, and report success with Wilson intervals. Also degrade one arm's view and see whether averaging helps or hurts.</span></label></li>
+  </ul>
+  <div class="gate"><label><input type="checkbox" data-key="m8g"><span><b>Gate.</b> A table for variants A to D with agreement, probe accuracy, rank and success with intervals, and a short paragraph stating whether consensus survived without the third-person view, and where the intervals are too wide to say.</span></label></div>

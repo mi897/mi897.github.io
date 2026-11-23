@@ -3,6 +3,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import topics from "../../data/research/topics.json";
 import { formatDate } from "../../lib/research";
 
+const fragments = import.meta.glob("../../data/research/latenttom-learning-plan/*.html", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+const studyTotal = Object.values(fragments).reduce((n, h) => n + (h.match(/data-key=/g) ?? []).length, 0);
+
 // kind "study" = a deep dive with a learning plan and projects; "survey" = a literature review with a reading list and log.
 const groups = [
   { kind: "study", heading: "Deep dives", blurb: "Structured study tracks: learn the theory, then rebuild the work in code.", cta: "Open study plan" },
@@ -29,9 +32,9 @@ const groups = [
                 <p class="text-sm leading-relaxed">{t.summary}</p>
                 <p class="text-xs opacity-60">Started {formatDate(t.started)} · {t.scope}</p>
                 {t.kind === "study" && (
-                  <div class="flex items-center gap-3 text-xs" data-study-card={t.slug}>
-                    <progress class="progress progress-primary w-40" value="0" max="31"></progress>
-                    <span data-study-label>0 of 31 done</span>
+                  <div class="flex items-center gap-3 text-xs" data-study-card={t.slug} data-total={studyTotal}>
+                    <progress class="progress progress-primary w-40" value="0" max={studyTotal}></progress>
+                    <span data-study-label>0 of {studyTotal} done</span>
                   </div>
                 )}
               </div>
@@ -49,7 +52,8 @@ const groups = [
   if (card) {
     let done = 0;
     try { done = Object.values(JSON.parse(localStorage.getItem("latenttom-plan-progress") || "{}")).filter(Boolean).length; } catch {}
+    const total = Number(card.dataset.total);
     card.querySelector("progress")!.value = done;
-    card.querySelector("[data-study-label]")!.textContent = `${done} of 31 done`;
+    card.querySelector("[data-study-label]")!.textContent = `${done} of ${total} done`;
   }
 </script>

@@ -11,7 +11,7 @@
     "slug": "latenttom-learning-plan",
     "kind": "study",
     "title": "LatentToM learning plan",
-    "summary": "A deep dive into Latent Theory of Mind: rebuild the paper's decentralized diffusion architecture in a 2D two-pusher simulation. Seven modules from diffusion policy through sheaf theory to a full ablation report, each ending in a gate.",
+    "summary": "A deep dive into Latent Theory of Mind: rebuild the paper's decentralized diffusion architecture in a 2D two-pusher simulation. Seven modules from diffusion policy through sheaf theory to a full ablation report, each ending in a gate. An optional eighth module tests whether the arms can reach consensus without the shared third-person camera.",
     "started": "2026-11-20",
     "scope": "About 90 hours, roughly 11 weeks at 8 hours a week",
     "paper": "2505.09144"

@@ -4,15 +4,80 @@
   "storageKey": "latenttom-plan-progress",
   "updated": "2026-11-20",
   "sections": [
-    { "id": "overview", "label": "Overview", "summary": "What LatentToM builds, how its pieces fit, where you start", "hours": 0 },
-    { "id": "roadmap", "label": "Roadmap", "summary": "All seven modules with dependencies and gates", "hours": 0 },
-    { "id": "module-1", "label": "1. Diffusion policy", "tab": "1 Diffusion", "summary": "DDPM, conditioning, action chunking", "hours": 12 },
-    { "id": "module-2", "label": "2. Imitation learning", "tab": "2 Imitation", "summary": "Two-agent simulator, expert, centralized baseline", "hours": 15 },
-    { "id": "module-3", "label": "3. Ego and consensus embeddings", "tab": "3 Embeddings", "summary": "Split encoders, naive decentralized baseline", "hours": 8 },
-    { "id": "module-4", "label": "4. Sheaf theory", "tab": "4 Sheaves", "summary": "Coboundary, Laplacian, global sections", "hours": 12 },
-    { "id": "module-5", "label": "5. Losses", "tab": "5 Losses", "summary": "Cohomology loss, ToM decoder, directional loss", "hours": 14 },
-    { "id": "module-6", "label": "6. Laplacian inference", "tab": "6 Inference", "summary": "The run-time averaging update and its analysis", "hours": 8 },
-    { "id": "module-7", "label": "7. Full recreation", "tab": "7 Recreation", "summary": "Integration, evaluation, ablations", "hours": 21 },
-    { "id": "sources", "label": "Sources", "summary": "Pages opened and reading by module", "hours": 0 }
+    {
+      "id": "overview",
+      "label": "Overview",
+      "summary": "What LatentToM builds, how its pieces fit, where you start",
+      "hours": 0
+    },
+    {
+      "id": "roadmap",
+      "label": "Roadmap",
+      "summary": "All seven modules with dependencies and gates",
+      "hours": 0
+    },
+    {
+      "id": "module-1",
+      "label": "1. Diffusion policy",
+      "tab": "1 Diffusion",
+      "summary": "DDPM, conditioning, action chunking",
+      "hours": 12
+    },
+    {
+      "id": "module-2",
+      "label": "2. Imitation learning",
+      "tab": "2 Imitation",
+      "summary": "Two-agent simulator, expert, centralized baseline",
+      "hours": 15
+    },
+    {
+      "id": "module-3",
+      "label": "3. Ego and consensus embeddings",
+      "tab": "3 Embeddings",
+      "summary": "Split encoders, naive decentralized baseline",
+      "hours": 8
+    },
+    {
+      "id": "module-4",
+      "label": "4. Sheaf theory",
+      "tab": "4 Sheaves",
+      "summary": "Coboundary, Laplacian, global sections",
+      "hours": 12
+    },
+    {
+      "id": "module-5",
+      "label": "5. Losses",
+      "tab": "5 Losses",
+      "summary": "Cohomology loss, ToM decoder, directional loss",
+      "hours": 14
+    },
+    {
+      "id": "module-6",
+      "label": "6. Laplacian inference",
+      "tab": "6 Inference",
+      "summary": "The run-time averaging update and its analysis",
+      "hours": 8
+    },
+    {
+      "id": "module-7",
+      "label": "7. Full recreation",
+      "tab": "7 Recreation",
+      "summary": "Integration, evaluation, ablations",
+      "hours": 21
+    },
+    {
+      "id": "module-8",
+      "label": "8. Extension: no shared camera",
+      "tab": "8 No camera",
+      "summary": "Optional: can the arms reach consensus without a third-person view?",
+      "hours": 10,
+      "optional": true
+    },
+    {
+      "id": "sources",
+      "label": "Sources",
+      "summary": "Pages opened and reading by module",
+      "hours": 0
+    }
   ]
 }
