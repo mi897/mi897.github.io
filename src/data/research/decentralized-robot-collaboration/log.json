@@ -31,17 +31,15 @@
     "title": "Reading pass: LatentToM stands out",
     "did": [
       "Read five papers from the reading list: 2109.14755 (empirical game-theoretic role assignment), 2405.13941 (swarm control and task allocation), 2309.08896 (GATAR, graph-based task allocation), 2501.08726 (task allocation review) and 2505.09144 (LatentToM).",
-      "Marked all five as read. The remaining 17 are still unread."
     ],
     "found": [
       "LatentToM was the one that stuck. Each robot keeps two latent representations, an ego embedding for its own view and a consensus embedding trained to be shared across robots, and the ego/consensus split is what made it interesting to me.",
       "That duality made me think of world models: a group of agents learning the world together over time, with each keeping its own perspective while converging on a shared picture, and sharing group objectives through that common representation.",
-      "The other four papers either did not line up with the research objectives or did not give me anything new beyond what I already had from the first search. That is a judgement from this reading pass, not a verdict on the papers."
+      "The other four papers either did not line up with the research objectives or did not give me anything new beyond what I already had from the first search."
     ],
     "papers_added": [],
     "open_questions": [
       "Could the consensus embedding be read as a shared world model that a group builds up over time, rather than something fixed at training? What would it take for it to carry shared objectives as well as shared scene state?",
-      "Is a read paper that did not fit the objectives worth recording on the research page, so the reading list shows what was ruled out and why?"
     ],
     "next_steps": [
       "Build a deep dive on LatentToM to work through the ego/consensus idea properly.",
